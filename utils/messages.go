@@ -17,10 +17,9 @@ type MsgData struct {
 
 func MessageHandler(channel string, client *twitch.Client, message twitch.PrivateMessage) {
 	data := CommandParser(message)
-	fmt.Println(data)
-	if data.Command == "!stats" {
-		// stats := utils.GetApexStats()
-		client.Say(channel, data.UserAt + " No stats available at the moment")
+
+	if data.Command == "!commands" {
+		client.Say(channel, "!lovecalc {name} | !quote | !stats")
 	}
 
 	if data.Command == "!lovecalc" {
@@ -41,6 +40,12 @@ func MessageHandler(channel string, client *twitch.Client, message twitch.Privat
 		resp := GetQuote()
 
 		client.Say(channel, fmt.Sprintf("%q' - %s, %s", resp.Quote, resp.Character, resp.Anime))
+	}
+
+	if data.Command == "!stats" {
+		overview := GetApexStats()
+
+		client.Say(channel, fmt.Sprintf("Kills: %s | Damage: %s | Wins: %s | Most Played Legend: %s", overview.Kills, overview.Damage, overview.Wins, overview.Legend))
 	}
 }
 
