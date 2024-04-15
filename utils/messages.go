@@ -42,11 +42,37 @@ func MessageHandler(channel string, client *twitch.Client, message twitch.Privat
 		client.Say(channel, fmt.Sprintf("%q' - %s, %s", resp.Quote, resp.Character, resp.Anime))
 	}
 
-	if data.Command == "!stats" {
+	if data.Command == "!apexstats" {
 		overview := GetApexStats()
 
 		client.Say(channel, fmt.Sprintf("Kills: %s | Damage: %s | Wins: %s | Most Played Legend: %s", overview.Kills, overview.Damage, overview.Wins, overview.Legend))
 	}
+
+	if data.Command == "!age" {
+		age := "30"
+		client.Say(channel, fmt.Sprintf("I am %s years old.", age))
+	}
+
+	if data.Command == "!sponsor" {
+		url := "https://dubby.gg"
+		client.Say(channel, url)
+	}
+
+	if data.Command == "!setup" {
+		monitor := "https://tinyurl.com/2s3wfp7x"
+		keyboard := "https://tinyurl.com/5xn3ytvh"
+		mouse := "https://tinyurl.com/bdcut9kt"
+		headset := "https://tinyurl.com/kp6ce84k"
+		client.Say(channel, fmt.Sprintf(`Monitor: %s | Keyboard: %s | Mouse: %s | Headset: %s`, monitor, keyboard, mouse, headset))
+	}
+
+	if data.Command == "!ranks" {
+		apex := "Plat 4"
+		siege := "Gold 1"
+		client.Say(channel, fmt.Sprintf(`Apex: %s | Siege: %s `, apex, siege))
+	}
+
+
 }
 
 func CommandParser(message twitch.PrivateMessage) MsgData {
